@@ -1,0 +1,27 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Pegar código
+      uses: actions/checkout@v2
+
+    - name: Instalar Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Instalar dependências
+      run: npm install
+
+    - name: Rodar testes
+      run: npm test -- --coverage
+
+    - name: Fazer build
+      run: npm run build
